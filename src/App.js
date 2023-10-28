@@ -7,6 +7,7 @@ import Page from "./Page";
 import NavBar from "./NavBar";
 import {AccountPage} from "./AccountPage";
 import {HistoryPage} from "./HistoryPage";
+import RegisterForm from "./RegisterForm";
 
 class App extends React.Component {
     constructor(props) {
@@ -46,8 +47,8 @@ class App extends React.Component {
                     msg = "Unknown error";
             }
             this.setState({
-                signInError: err.message
-            })
+                signInError: msg
+            });
         });
     }
 
@@ -63,7 +64,7 @@ class App extends React.Component {
             let msg;
             switch (err.code) {
                 case 'auth/email-already-in-use':
-                    msg = "Email already in use";
+                    msg = "Email already in use. If you already have an account, please sign in instead.";
                     break;
                 case 'auth/invalid-email':
                     msg = "Invalid email";
@@ -109,7 +110,9 @@ class App extends React.Component {
         let element;
         switch (this.state.page) {
             case Page.SignIn:
-                return <SignInForm callback={this.signIn} error={this.state.signInError}/>;
+                return <SignInForm callback={this.signIn} register={() => this.changePage(Page.Register)} error={this.state.signInError}/>;
+            case Page.Register:
+                return <RegisterForm callback={this.register} signIn={() => this.changePage(Page.SignIn)} error={this.state.registerError}/>;
             case Page.Home:
                 element = <HomePage/>;
                 break;

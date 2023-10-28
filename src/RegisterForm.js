@@ -61,7 +61,7 @@ function RegisterForm({callback, signIn, error}) {
                             className="text-blue-500 hover:underline focus:outline-none"
                             onClick={signIn}
                         >
-                            Click here to sign in to an existing account instead
+                            Click here to sign in to an existing account
                         </button>
                     </div>
                     {error && <div className="pt-8 text-lg text-red-500">Registration failed: {error}</div>}

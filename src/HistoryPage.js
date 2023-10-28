@@ -1,10 +1,10 @@
 import React from 'react';
 
-export class HomePage extends React.Component {
+export class HistoryPage extends React.Component {
     render() {
         return (
             <>
-                <h1>Home Page</h1>
+                <h1>History Page</h1>
             </>
         );
     }

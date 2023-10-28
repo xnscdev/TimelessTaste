@@ -3,14 +3,10 @@ import {auth} from './firebase';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
 import SignInForm from "./SignInForm";
 import {HomePage} from "./HomePage";
-
-const Page = {
-    SignIn: 1,
-    Register: 2,
-    Home: 3,
-    Account: 4,
-    History: 5
-};
+import Page from "./Page";
+import NavBar from "./NavBar";
+import {AccountPage} from "./AccountPage";
+import {HistoryPage} from "./HistoryPage";
 
 class App extends React.Component {
     constructor(props) {
@@ -21,6 +17,8 @@ class App extends React.Component {
         }
         this.signIn = this.signIn.bind(this);
         this.register = this.register.bind(this);
+        this.signOut = this.signOut.bind(this);
+        this.changePage = this.changePage.bind(this);
         this.authStateChanged = this.authStateChanged.bind(this);
         auth.onAuthStateChanged(this.authStateChanged);
     }
@@ -87,6 +85,10 @@ class App extends React.Component {
         auth.signOut();
     }
 
+    changePage(page) {
+        this.setState({page});
+    }
+
     authStateChanged(user) {
         if (user) {
             this.setState({
@@ -104,14 +106,30 @@ class App extends React.Component {
     }
 
     render() {
+        let element;
         switch (this.state.page) {
             case Page.SignIn:
                 return <SignInForm callback={this.signIn} error={this.state.signInError}/>;
             case Page.Home:
-                return <HomePage/>;
+                element = <HomePage/>;
+                break;
+            case Page.Account:
+                element = <AccountPage/>;
+                break;
+            case Page.History:
+                element = <HistoryPage/>;
+                break;
             default:
-                return <h1 className="text-red-500">Invalid page</h1>;
+                element = <div className="flex text-5xl h-screen justify-center items-center text-red-500">Invalid page</div>;
         }
+        return (
+            <>
+                <NavBar changePage={this.changePage} signOut={this.signOut}/>
+                <div className="p-5">
+                    {element}
+                </div>
+            </>
+        )
     }
 }
 

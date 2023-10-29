@@ -49,25 +49,25 @@ function AccountPage() {
 
                 <div>
                     <input type="checkbox" id="calories" value="Calories"></input>
-                    <label for="calories">Calories</label>
+                    <label htmlFor="calories">Calories</label>
                     <input type="checkbox" id="Fat" value="Fat"></input>
-                    <label for="Fat">Fat</label>
+                    <label htmlFor="Fat">Fat</label>
                     <input type="checkbox" id="Cholestrol" value="Cholestrol"></input>
-                    <label for="Cholestrol">Cholestrol</label> <br></br>
+                    <label htmlFor="Cholestrol">Cholestrol</label> <br></br>
                     <input type="checkbox" id="Sodium" value="Sodium"></input>
-                    <label for="Sodium">Sodium</label>
+                    <label htmlFor="Sodium">Sodium</label>
                     <input type="checkbox" id="Carbohydrates" value="Carbohydrates"></input>
-                    <label for="Carbohydrates">Carbohydrates</label>
+                    <label htmlFor="Carbohydrates">Carbohydrates</label>
                     <input type="checkbox" id="Dietary Fiber" value="Dietary Fiber"></input>
-                    <label for="Dietary Fiber">Dietary Fiber</label> <br></br>
+                    <label htmlFor="Dietary Fiber">Dietary Fiber</label> <br></br>
                     <input type="checkbox" id="Protein" value="Protein"></input>
-                    <label for="Protein">Protein</label>
+                    <label htmlFor="Protein">Protein</label>
                     <input type="checkbox" id="Calcium" value="Calcium"></input>
-                    <label for="Calcium">Calcium</label>
+                    <label htmlFor="Calcium">Calcium</label>
                     <input type="checkbox" id="Iron" value="Iron"></input>
-                    <label for="Iron">Iron</label>
+                    <label htmlFor="Iron">Iron</label>
                 </div>
-                <input type="submit" formaction="#" value="Enter" class="border border-3 mt-5"></input>
+                <input type="submit" formAction="#" value="Enter" className="border border-3 mt-5"></input>
             </form>
         </div>
         </body>

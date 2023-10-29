@@ -1,26 +1,26 @@
 import React from 'react';
 import OpenAI from 'openai';
 
-// const openai = new OpenAI({
-//     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
-//     dangerouslyAllowBrowser: true
-// });
+const openai = new OpenAI({
+    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+    dangerouslyAllowBrowser: true
+});
 
 function HomePage() {
-    // const getRecipe = async () => {
-    //     // const initialPrompt = {
-    //     //     role: 'system',
-    //     //     content: 'You are a helpful mystic who does not reference itself and helps interpret dreams.'
-    //     // };
-    //     const messages = [
-    //         {role: 'user', content: 'What is the capital of the United States?'}
-    //     ];
-    //     const response = await openai.chat.completions.create({
-    //         model: 'gpt-3.5-turbo',
-    //         messages
-    //     });
-    //     console.log(response.choices);
-    // };
+    const getRecipe = async () => {
+        // const initialPrompt = {
+        //     role: 'system',
+        //     content: 'You are a helpful mystic who does not reference itself and helps interpret dreams.'
+        // };
+        const messages = [
+            {role: 'user', content: 'What is the capital of the United States?'}
+        ];
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages
+        });
+        console.log(response.choices);
+    };
 
     return (
         <>
@@ -30,12 +30,9 @@ function HomePage() {
             </div>
             <div className="text-center">
                 <div className="text-center">
-                    <h2 className="text-4xl font-medium mt-10 text-blue-900">What would you like to eat today?</h2>
+                    <h2 className="text-4xl font-medium my-10 text-blue-900">What would you like to eat today?</h2>
                     <form>
-                        <div className="mb-4">
-                            <label htmlFor="text-input" className="block text-gray-700 text-sm font-bold mb-2">
-                                Enter Text:
-                            </label>
+                        <div className="mb-4 w-1/2 mx-auto">
                             <input
                                 type="text"
                                 id="text-input"
@@ -48,9 +45,9 @@ function HomePage() {
                         <div className="text-center">
                             <button
                                 type="submit"
-                                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+                                className="text-xl bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
                             >
-                                Submit
+                                Generate Recipes!
                             </button>
                         </div>
                     </form>

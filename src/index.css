@@ -20,14 +20,16 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
-.slideUp{
-    animation: slideIn ease 2s forwards 2.2s;
+.slideUp {
+    opacity: 0;
+    animation: slideIn ease 2s forwards 0.1s;
 }
 @keyframes slideIn {
     0% {
-      transform: translateY(-800%);
+        transform: translateY(-40px);
     }
     100% {
-      transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}

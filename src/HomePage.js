@@ -24,6 +24,7 @@ function HomePage() {
                     '"name": "Recipe name",\n' +
                     '"nutrients": {\n' +
                     '"Protein": "5 g"\n' +
+                    '"Vitamins": "40 mg"\n' +
                     '},\n' +
                     '"ingredients": [\n' +
                     '"Ingredient 1",\n' +

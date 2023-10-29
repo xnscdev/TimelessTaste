@@ -6,7 +6,10 @@ function SignInForm({callback, register, error}) {
 
     return (
         <>
-            <div className="flex text-2xl justify-center items-center h-screen">
+            <div className="flex flex-col text-2xl justify-center items-center h-screen bg-blue-900">
+                <div>
+                    <p className='text-white font-bold mb-10 text-5xl'>TimelessTaste</p>
+                </div>
                 <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/2">
                     <div className="mb-4">
                         <div className="text-5xl mb-4 text-center">Sign In</div>

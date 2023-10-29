@@ -6,9 +6,6 @@ import OpenAI from 'openai';
 //     dangerouslyAllowBrowser: true
 // });
 
-<<<<<<< HEAD
-                <h2 className = "text-8xl font-bold text-blue-900">Welcome</h2>
-=======
 function HomePage() {
     // const getRecipe = async () => {
     //     // const initialPrompt = {
@@ -24,7 +21,6 @@ function HomePage() {
     //     });
     //     console.log(response.choices);
     // };
->>>>>>> c030aed216a5dc2d8fc7bfdb700fc3bacba6be92
 
     return (
         <>
@@ -32,38 +28,33 @@ function HomePage() {
                 <h2 className="text-8xl font-bold text-blue-900">Timeless Taste</h2>
                 <h2 className="text-6xl font-semibold mt-2 text-blue-900 ">Welcome</h2>
             </div>
-<<<<<<< HEAD
-
-            <div  className = "text-center">
-
-                <h2 className = "text-4xl font-medium mt-5 text-blue-900">What would you like to eat today?</h2>
-=======
             <div className="text-center">
-                <h2 className="text-4xl font-medium mt-10 text-blue-900">What would you like to eat today?</h2>
->>>>>>> c030aed216a5dc2d8fc7bfdb700fc3bacba6be92
-                <form>
-                    <div className="mb-4">
-                        <label htmlFor="text-input" className="block text-gray-700 text-sm font-bold mb-2">
-                            Enter Text:
-                        </label>
-                        <input
-                            type="text"
-                            id="text-input"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                            placeholder="Type something..."
-                            // value={inputValue}
-                            // onChange={(e) => setInputValue(e.target.value)}
-                        />
-                    </div>
-                    <div className="text-center">
-                        <button
-                            type="submit"
-                            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
-                        >
-                            Submit
-                        </button>
-                    </div>
-                </form>
+                <div className="text-center">
+                    <h2 className="text-4xl font-medium mt-10 text-blue-900">What would you like to eat today?</h2>
+                    <form>
+                        <div className="mb-4">
+                            <label htmlFor="text-input" className="block text-gray-700 text-sm font-bold mb-2">
+                                Enter Text:
+                            </label>
+                            <input
+                                type="text"
+                                id="text-input"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+                                placeholder="Type something..."
+                                // value={inputValue}
+                                // onChange={(e) => setInputValue(e.target.value)}
+                            />
+                        </div>
+                        <div className="text-center">
+                            <button
+                                type="submit"
+                                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+                            >
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </>
     );

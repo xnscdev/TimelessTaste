@@ -2,11 +2,47 @@ import React, {useRef, useState} from "react";
 import OpenAI from "openai";
 import {auth, db} from "./firebase";
 import {doc, collection, getDoc, setDoc} from "firebase/firestore";
+import { useMemo } from "react";
+import { useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, Marker, withGoogleMap } from "react-google-maps"
+import {withProps, compose} from "recompose";
 
 const openai = new OpenAI({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
     dangerouslyAllowBrowser: true,
 });
+
+const MyMapComponent= compose(
+    withProps({
+      googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
+      loadingElement: <div style={{ height: `100%` }} />,
+      containerElement: <div style={{ height: `400px` }} />,
+      mapElement: <div style={{ height: `100%` }} />,
+    }),
+    withGoogleMap
+  )(props =>
+    {
+
+        const center = useMemo(() => ({ lat: 36.2, lng: -86.65 }), []);
+        return (
+    <GoogleMap
+    mapContainerClassName="map-container"
+    center={center}
+    zoom={10}
+    >
+        <Marker position={{ lat: 36.183130, lng: -86.747740 }}>
+        </Marker>
+        <Marker position={{ lat: 36.126770, lng: -86.847504 }}>
+        </Marker>
+        <Marker position={{ lat: 36.119652, lng: -86.808731 }}>
+        </Marker>
+        <Marker position={{ lat: 36.105990, lng: -86.818440 }}>
+        </Marker>
+        <Marker position={{ lat: 36.105040, lng: -86.815290 }}>
+        </Marker>
+    </GoogleMap>)
+    }
+  );
 
 function HomePage() {
     const [input, setInput] = useState("");
@@ -15,6 +51,9 @@ function HomePage() {
     const [confirmation, setConfirmation] = useState('');
     const [saved, setSaved] = useState(false);
     const messages = useRef([]);
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
+    });
 
     const getNewRecipe = async () => {
         const uid = auth.currentUser.uid;
@@ -181,6 +220,16 @@ function HomePage() {
                         <ol className="list-decimal list-inside text-justify space-y-8">{instructions}</ol>
                     </div>
                 </div>
+
+                <div className="chungus">
+                {!isLoaded ? (
+                    <h1>Loading...</h1>
+                ) : (
+                   <MyMapComponent />
+                )}
+            </div>
+
+
             </>
         );
     } else {
@@ -220,6 +269,7 @@ function HomePage() {
                     <div
                         className={"text-center mt-6 text-lg " + (confirmation.includes("Error") ? "text-red-500" : "text-green-700")}>{confirmation}</div>
                 </form>
+
             </div>
         );
     }

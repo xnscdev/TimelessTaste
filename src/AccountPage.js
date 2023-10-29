@@ -1,4 +1,5 @@
 import React from "react";
+import {doc, collection, getDocs, setDoc, deleteDoc, updateDoc} from 'firebase/firestore';
 
 function AccountPage() {
     return (
@@ -20,7 +21,7 @@ function AccountPage() {
                     </div>
                     <div>
                         <input
-                            className="shadow appearance-none border rounded w-1/2 py-3 px-3 text-gray-700 text-x1 leading-tight focus:outline-none focus:shadow-outline mt-5"
+                            className="shadow appearance-none border rounded w-1/2 py-3 px-3 text-gray-700 text-2xl leading-tight focus:outline-none focus:shadow-outline mt-5"
                             type="text"
                             id="restrictions"
                             name="restrictions"
@@ -30,7 +31,7 @@ function AccountPage() {
                     <div className="mt-12">
                         <label
                             htmlFor="dropdown"
-                            class="font-semibold text-5xl"
+                            className="font-semibold text-5xl"
                         >
                             Select Diet
                         </label>
@@ -52,78 +53,80 @@ function AccountPage() {
                             <label class="font-semibold text-5xl">
                                 Select Nutrients to Track
                             </label>
-                            <div className="mt-4 w-1/3 mx-auto">
+                            <div className="mt-4 mx-auto">
                                 <div className="flex">
-                                    <div className="flex-1">
-                                        <div className="flex">
-                                            <input
-                                                type="checkbox"
-                                                id="calories"
-                                                value="Calories"
-                                                className="w-6 h-6 mx-4"
-                                            />
-                                            <label
-                                                htmlFor="calories"
-                                                className="font-bold text-3xl "
-                                            >
-                                                Calories
-                                            </label>
-                                        </div>
-                                        <div className="flex">
-                                            <input
-                                                type="checkbox"
-                                                id="Fat"
-                                                value="Fat"
-                                                className="w-6 h-6 mx-4"
-                                            />
-                                            <label
-                                                htmlFor="Fat"
-                                                className="font-bold text-3xl "
-                                            >
-                                                Fat
-                                            </label>
-                                        </div>
-                                        <div className="flex">
-                                            <input
-                                                type="checkbox"
-                                                id="Cholesterol"
-                                                value="Cholesterol"
-                                                className="w-6 h-6 mx-4"
-                                            />
-                                            <label
-                                                htmlFor="Cholesterol"
-                                                class="font-bold text-3xl "
-                                            >
-                                                Cholesterol
-                                            </label>
-                                        </div>
-                                        <div className="flex">
-                                            <input
-                                                type="checkbox"
-                                                id="Sodium"
-                                                value="Sodium"
-                                                className="w-6 h-6 mx-4"
-                                            />
-                                            <label
-                                                htmlFor="Sodium"
-                                                class="font-bold text-3xl "
-                                            >
-                                                Sodium
-                                            </label>
-                                        </div>
-                                        <div className="flex">
-                                            <input
-                                                type="checkbox"
-                                                id="Carbohydrates"
-                                                value="Carbohydrates"
-                                                className="w-6 h-6 mx-4"
-                                            />
-                                            <label
-                                                htmlFor="Carbohydrates"
-                                                className="font-bold text-3xl "
-                                            >
-                                                Carbohydrates
-                                            </label>
+                                    <div className="flex-1 flex flex-col items-end">
+                                        <div className="">
+                                            <div className="flex">
+                                                <input
+                                                    type="checkbox"
+                                                    id="calories"
+                                                    value="Calories"
+                                                    className="w-6 h-6 mx-4"
+                                                />
+                                                <label
+                                                    htmlFor="calories"
+                                                    className="font-bold text-3xl "
+                                                >
+                                                    Calories
+                                                </label>
+                                            </div>
+                                            <div className="flex">
+                                                <input
+                                                    type="checkbox"
+                                                    id="Fat"
+                                                    value="Fat"
+                                                    className="w-6 h-6 mx-4"
+                                                />
+                                                <label
+                                                    htmlFor="Fat"
+                                                    className="font-bold text-3xl "
+                                                >
+                                                    Fat
+                                                </label>
+                                            </div>
+                                            <div className="flex">
+                                                <input
+                                                    type="checkbox"
+                                                    id="Cholesterol"
+                                                    value="Cholesterol"
+                                                    className="w-6 h-6 mx-4"
+                                                />
+                                                <label
+                                                    htmlFor="Cholesterol"
+                                                    className="font-bold text-3xl "
+                                                >
+                                                    Cholesterol
+                                                </label>
+                                            </div>
+                                            <div className="flex">
+                                                <input
+                                                    type="checkbox"
+                                                    id="Sodium"
+                                                    value="Sodium"
+                                                    className="w-6 h-6 mx-4"
+                                                />
+                                                <label
+                                                    htmlFor="Sodium"
+                                                    className="font-bold text-3xl "
+                                                >
+                                                    Sodium
+                                                </label>
+                                            </div>
+                                            <div className="flex">
+                                                <input
+                                                    type="checkbox"
+                                                    id="Carbohydrates"
+                                                    value="Carbohydrates"
+                                                    className="w-6 h-6 mx-4"
+                                                />
+                                                <label
+                                                    htmlFor="Carbohydrates"
+                                                    className="font-bold text-3xl "
+                                                >
+                                                    Carbohydrates
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="flex-1">
@@ -136,7 +139,7 @@ function AccountPage() {
                                             />
                                             <label
                                                 htmlFor="Dietary Fiber"
-                                                className="font-bold text-3xl "
+                                                className="font-bold text-3xl text-left"
                                             >
                                                 Dietary Fiber
                                             </label>
@@ -150,7 +153,7 @@ function AccountPage() {
                                             />
                                             <label
                                                 htmlFor="Protein"
-                                                class="font-bold text-3xl "
+                                                className="font-bold text-3xl "
                                             >
                                                 Protein
                                             </label>
@@ -164,7 +167,7 @@ function AccountPage() {
                                             />
                                             <label
                                                 htmlFor="Calcium"
-                                                class="font-bold text-3xl "
+                                                className="font-bold text-3xl "
                                             >
                                                 Calcium
                                             </label>
@@ -178,7 +181,7 @@ function AccountPage() {
                                             />
                                             <label
                                                 htmlFor="Iron"
-                                                class="font-bold text-3xl "
+                                                className="font-bold text-3xl "
                                             >
                                                 Iron
                                             </label>
@@ -192,7 +195,7 @@ function AccountPage() {
                                             />
                                             <label
                                                 htmlFor="Vitamins"
-                                                class="font-bold text-3xl "
+                                                className="font-bold text-3xl "
                                             >
                                                 Vitamins
                                             </label>

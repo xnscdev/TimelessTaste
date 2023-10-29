@@ -3,8 +3,8 @@
 @import "tailwindcss/utilities";
 
 :root {
-    --brand-blue: #0070f3;
-    --gray-blue: #6b7280;
+    --brand-blue: #d3d8de;
+    --gray-blue: #e6ecf2;
 }
 
 body {
@@ -20,3 +20,15 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
+.slideUp{
+    animation: slideIn ease 3s forwards 1.2s;
+}
+@keyframes slideIn {
+    0% {
+      transform: translateY(-600%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  

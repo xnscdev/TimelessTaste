@@ -9,7 +9,7 @@ function SignInForm({ callback, register, error }) {
             <div className="flex">
                 <div className="flex flex-col flex-1 justify-center items-center bg-blue-900">
                     <div className="p-12">
-                        <p className="font-bold mb-5 text-5xl text-white">
+                        <p className="slideUp font-bold mb-5 text-5xl text-white">
                             TimelessTaste
                         </p>
                         <p className="text-3xl text-white">

@@ -71,7 +71,7 @@ function AccountPage() {
         <>
             <div>
                 <div>
-                    <h1 className="font-bold text-center text-7xl mb-5 text-blue-900">
+                    <h1 className="font-bold text-center text-7xl my-8 text-blue-900">
                         Welcome
                     </h1>
                 </div>

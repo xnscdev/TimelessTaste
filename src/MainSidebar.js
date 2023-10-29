@@ -1,9 +1,9 @@
-import background from './homeScreen.jpg';
+import background from './homeScreen.png';
 
 function MainSidebar() {
     return (
-        <div style={{'--image-url': `url(${background})`}} className="flex flex-col flex-initial justify-center items-center bg-[image:var(--image-url)]">
-            <div className="p-12">
+        <div style={{'--image-url': `url(${background})`}} className="hidden flex-1 bg-cover bg-bottom justify-center items-center bg-[image:var(--image-url)] md:flex ">
+            <div className="p-12 mt-80">
                 <p className="slideUp font-bold mb-5 text-5xl text-white">
                     Timeless Taste
                 </p>

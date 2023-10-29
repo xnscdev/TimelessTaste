@@ -220,13 +220,15 @@ function HomePage() {
                         <ol className="list-decimal list-inside text-justify space-y-8">{instructions}</ol>
                     </div>
                 </div>
-
+                                <div>
+                                    <p className = "text-center text-3xl text-white font-medium mb-10 bg-gradient-to-r from-blue-500 via-blue-800 to-blue-500 p-4">Head to these locations to buy ingredients:</p>
                 <div className="chungus">
                 {!isLoaded ? (
                     <h1>Loading...</h1>
                 ) : (
                    <MyMapComponent />
                 )}
+            </div>
             </div>
 
 
@@ -239,7 +241,7 @@ function HomePage() {
                     e.preventDefault();
                     await getNewRecipe();
                 }}>
-                    <h2 className="text-5xl font-medium my-10 text-blue-900">
+                    <h2 className="text-5xl font-medium my-20 text-blue-900">
                         Welcome! What would you like to eat today?
                     </h2>
                     <div className="w-1/2 mx-auto">
@@ -263,7 +265,7 @@ function HomePage() {
                             }
                             disabled={generating}
                         >
-                            {generating ? "Generating..." : "Generate Recipes!"}
+                            {generating ? "Generating... This may take a while..." : "Generate Recipes!"}
                         </button>
                     </div>
                     <div
@@ -277,7 +279,7 @@ function HomePage() {
     return (
         <>
             <div className="text-center">
-                <h2 className="text-8xl font-bold text-blue-900 mb-10">
+                <h2 className="text-8xl font-bold text-blue-900 my-10">
                     Timeless Taste
                 </h2>
             </div>

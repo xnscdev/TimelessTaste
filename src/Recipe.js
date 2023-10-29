@@ -7,13 +7,12 @@ export default class Recipe {
         this.instructions = json['instructions'];
     }
 
-    getNutrients() {
-        const nutrients = Object.keys(this.nutrients).map(k => <p key={k}>{k}: {this.nutrients[k]}</p>);
-        return (
-            <>
-                <h3 className="font-semibold">Nutrients</h3>
-                {nutrients}
-            </>
-        );
+    getJSON() {
+        return JSON.stringify({
+            name: this.name,
+            nutrients: this.nutrients,
+            ingredients: this.ingredients,
+            instructions: this.instructions
+        });
     }
 }

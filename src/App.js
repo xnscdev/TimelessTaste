@@ -148,7 +148,7 @@ class App extends React.Component {
         return (
             <>
                 <NavBar changePage={this.changePage} signOut={this.signOut} />
-                <div className="p-5 bg-[var(--gray-blue)] h-screen">{element}</div>
+                <div className="p-5">{element}</div>
             </>
         );
     }

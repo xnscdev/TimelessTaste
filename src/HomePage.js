@@ -13,7 +13,7 @@ function HomePage() {
     const [input, setInput] = useState("");
     const [error, setError] = useState(false);
     const [generating, setGenerating] = useState(false);
-    const [recipe, setRecipe] = useState(new Recipe('{"name":"Recipe name","nutrients":{"Protein":"-1 g","Cholesterol":"69 g"},"ingredients":["1 thing"],"instructions":["step 1"]}'));
+    const [recipe, setRecipe] = useState(null);
 
     const getRecipe = async () => {
         const uid = auth.currentUser.uid;
@@ -93,10 +93,33 @@ function HomePage() {
 
     let content;
     if (recipe) {
+        const nutrients = Object.keys(recipe.nutrients).map(k => (
+            <tr key={k}>
+                <td>{k}</td>
+                <td>{recipe.nutrients[k]}</td>
+            </tr>
+        ));
+        const ingredients = recipe.ingredients.map(step => <li key={step}>{step}</li>);
+        const instructions = recipe.instructions.map(step => <li key={step}>{step}</li>);
         content = (
             <>
                 <h3 className="text-center text-3xl font-medium my-10 text-blue-900">Here's your recipe:</h3>
                 <h3 className="text-center text-5xl font-medium my-10 text-blue-900">{recipe.name}</h3>
+                <div className="flex flex-wrap lg:w-2/3 mx-auto text-2xl mb-24">
+                    <div className="w-full xl:w-1/2 px-8">
+                        <h4 className="text-center text-3xl text-white font-medium mb-10 bg-gradient-to-r from-blue-500 via-blue-800 to-blue-500 p-4">Nutrients</h4>
+                        <table className="w-full table-auto">
+                            <tbody>{nutrients}</tbody>
+                        </table>
+                        <h4 className="text-center text-3xl text-white font-medium my-10 bg-gradient-to-r from-blue-500 via-blue-800 to-blue-500 p-4">Ingredients</h4>
+                        <ul className="list-disc list-inside text-justify mb-10">{ingredients}</ul>
+                    </div>
+                    <div className="w-full xl:w-1/2 px-8">
+                        <h4 className="text-center text-3xl text-white font-medium mb-10 bg-gradient-to-r from-blue-500 via-blue-800 to-blue-500 p-4">Instructions</h4>
+                        <ol className="list-decimal list-inside text-justify space-y-8">{instructions}</ol>
+                    </div>
+                </div>
+
             </>
         );
     }

@@ -1,9 +1,10 @@
 import React from 'react';
 import OpenAI from 'openai';
 
-// const openai = new OpenAI({
-//     apiKey: process.env.REACT_APP_OPENAI_API_KEY
-// });
+const openai = new OpenAI({
+    apiKey: process.env.REACT_APP_OPENAI_API_KEY
+});
+console.log(openai);
 
 // export async function POST(req) {
 //     const {messages} = await req.json();

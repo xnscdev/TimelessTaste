@@ -124,9 +124,9 @@ function AccountPage() {
                             <label className="font-semibold text-5xl">
                                 Select Nutrients to Track
                             </label>
-                            <div className="mt-4 mx-auto">
+                            <div className="mt-4 mx-auto lg:w-2/3 xl:w-1/2">
                                 <div className="flex">
-                                    <div className="flex-1 flex flex-col items-end">
+                                    <div className="flex-1 flex flex-col">
                                         <div className="flex">
                                             <input
                                                 type="checkbox"
@@ -294,7 +294,7 @@ function AccountPage() {
 
                             <button
                                 type="button"
-                                className="text-xl bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 mt-4"
+                                className="mt-8 text-xl bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
                                 onClick={saveProfile}
                             >Save Profile</button>
                             <div className={"mt-6 text-lg" + (confirmation.includes("Error") ? " text-red-500" : "")}>{confirmation}</div>

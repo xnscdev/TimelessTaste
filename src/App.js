@@ -5,9 +5,9 @@ import {
     signInWithEmailAndPassword,
 } from "firebase/auth";
 import SignInForm from "./SignInForm";
+import HomePage from "./HomePage";
 import Page from "./Page";
 import NavBar from "./NavBar";
-import HomePage from "./HomePage";
 import AccountPage from "./AccountPage";
 import HistoryPage from "./HistoryPage";
 import RegisterForm from "./RegisterForm";

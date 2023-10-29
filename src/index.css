@@ -21,14 +21,13 @@ code {
         monospace;
 }
 .slideUp{
-    animation: slideIn ease 3s forwards 1.2s;
+    animation: slideIn ease 2s forwards 2.2s;
 }
 @keyframes slideIn {
     0% {
-      transform: translateY(-600%);
+      transform: translateY(-800%);
     }
     100% {
       transform: translateY(0);
     }
   }
-  

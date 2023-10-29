@@ -2,11 +2,11 @@ import React from 'react';
 import {auth} from './firebase';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
 import SignInForm from "./SignInForm";
-import {HomePage} from "./HomePage";
 import Page from "./Page";
 import NavBar from "./NavBar";
-import {AccountPage} from "./AccountPage";
-import {HistoryPage} from "./HistoryPage";
+import HomePage from "./HomePage";
+import AccountPage from "./AccountPage";
+import HistoryPage from "./HistoryPage";
 import RegisterForm from "./RegisterForm";
 
 class App extends React.Component {

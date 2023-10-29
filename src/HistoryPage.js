@@ -1,11 +1,9 @@
-import React from 'react';
-
-export class HistoryPage extends React.Component {
-    render() {
-        return (
-            <>
-            
-            </>
-        );
-    }
+function HistoryPage() {
+    return (
+        <>
+            <h1>History Page</h1>
+        </>
+    );
 }
+
+export default HistoryPage;

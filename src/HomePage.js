@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import OpenAI from "openai";
 import { auth, db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
+import Recipe from "./Recipe";
 
 const openai = new OpenAI({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -12,7 +13,7 @@ function HomePage() {
     const [input, setInput] = useState("");
     const [error, setError] = useState(false);
     const [generating, setGenerating] = useState(false);
-    const [howWork, setHowWork] = useState(false);
+    const [recipe, setRecipe] = useState(new Recipe('{"name":"Recipe name","nutrients":{"Protein":"-1 g","Cholesterol":"69 g"},"ingredients":["1 thing"],"instructions":["step 1"]}'));
 
     const getRecipe = async () => {
         const uid = auth.currentUser.uid;
@@ -86,16 +87,21 @@ function HomePage() {
 
         setError(false);
         setGenerating(false);
-        console.log(output.message.content);
+        const r = new Recipe(output.message.content);
+        setRecipe(r);
     };
 
-    return (
-        <>
-            <div className="text-center">
-                <h2 className="text-8xl font-bold text-blue-900 mb-10">
-                    Timeless Taste
-                </h2>
-            </div>
+    let content;
+    if (recipe) {
+        content = (
+            <>
+                <h3 className="text-center text-3xl font-medium my-10 text-blue-900">Here's your recipe:</h3>
+                <h3 className="text-center text-5xl font-medium my-10 text-blue-900">{recipe.name}</h3>
+            </>
+        );
+    }
+    else {
+        content = (
             <div className="text-center">
                 <h2 className="text-5xl font-medium my-10 text-blue-900">
                     Welcome! What would you like to eat today?
@@ -107,7 +113,7 @@ function HomePage() {
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring text-2xl focus:ring-blue-500"
                         placeholder="Enter a food..."
                         value={input}
-                        onChange={(e) => setInput(e.target.value)}
+                        onChange={e => setInput(e.target.value)}
                     />
                 </div>
                 <div className="mt-8 text-center">
@@ -132,6 +138,17 @@ function HomePage() {
                     </div>
                 )}
             </div>
+        );
+    }
+
+    return (
+        <>
+            <div className="text-center">
+                <h2 className="text-8xl font-bold text-blue-900 mb-10">
+                    Timeless Taste
+                </h2>
+            </div>
+            {content}
         </>
     );
 }

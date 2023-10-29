@@ -17,7 +17,7 @@ function NavBar({ changePage, signOut }) {
   return (
     <nav className="bg-blue-900 p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white font-semibold text-5xl">TimelessTaste</div>
+        <div className="text-white font-semibold text-5xl">Timeless Taste</div>
         <ul className="flex space-x-4">
           <NavElement callback={() => changePage(Page.Home)} title="Home" />
           <NavElement

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import OpenAI from "openai";
 import { auth, db } from "./firebase";
-import { doc, getDoc } from "firebase/firestore";
-import Recipe from "./Recipe";
+import { doc, collection, getDoc, setDoc } from "firebase/firestore";
 
 const openai = new OpenAI({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -11,13 +10,20 @@ const openai = new OpenAI({
 
 function HomePage() {
     const [input, setInput] = useState("");
-    const [error, setError] = useState(false);
     const [generating, setGenerating] = useState(false);
     const [recipe, setRecipe] = useState(null);
+    const [confirmation, setConfirmation] = useState('');
+    const [saved, setSaved] = useState(false);
 
     const getRecipe = async () => {
         const uid = auth.currentUser.uid;
-        const userDoc = await getDoc(doc(db, "users", uid));
+        let userDoc;
+        try {
+            userDoc = await getDoc(doc(db, "users", uid));
+        }
+        catch (e) {
+            setConfirmation(`Error reading your dietary preferences: ${e}`);
+        }
         let dietaryRestrictions = "no dietary restrictions",
             diet = "None",
             nutrients = "do not list any nutrients";
@@ -78,33 +84,54 @@ function HomePage() {
             model: "gpt-3.5-turbo",
             messages,
         });
-        console.log(response.choices);
         const output = response.choices[0];
         if (output.finish_reason !== "stop") {
-            setError(true);
+            setConfirmation('Error generating a recipe. Please try again or use different input text.');
             return;
         }
 
-        setError(false);
+        setConfirmation('');
         setGenerating(false);
-        const r = new Recipe(output.message.content);
+        const r = JSON.parse(output.message.content);
+        r['instructions'] = r['instructions'].map(item => item.replace(/^\d+\.\s+/, ''));
         setRecipe(r);
+    };
+
+    const saveRecipe = async () => {
+        if (saved)
+            return;
+        const uid = auth.currentUser.uid;
+        try {
+            const c = collection(db, "users", uid, "history");
+            await setDoc(doc(c), recipe);
+            setConfirmation('Successfully saved recipe!');
+            setSaved(true);
+        }
+        catch (e) {
+            setConfirmation(`Error saving recipe: ${e}`);
+        }
     };
 
     let content;
     if (recipe) {
-        const nutrients = Object.keys(recipe.nutrients).map(k => (
+        const nutrients = Object.keys(recipe['nutrients']).map(k => (
             <tr key={k}>
                 <td>{k}</td>
-                <td>{recipe.nutrients[k]}</td>
+                <td>{recipe['nutrients'][k]}</td>
             </tr>
         ));
-        const ingredients = recipe.ingredients.map(step => <li key={step}>{step}</li>);
-        const instructions = recipe.instructions.map(step => <li key={step}>{step}</li>);
+        const ingredients = recipe['ingredients'].map(step => <li key={step}>{step}</li>);
+        const instructions = recipe['instructions'].map(step => <li key={step}>{step}</li>);
         content = (
             <>
                 <h3 className="text-center text-3xl font-medium my-10 text-blue-900">Here's your recipe:</h3>
                 <h3 className="text-center text-5xl font-medium my-10 text-blue-900">{recipe.name}</h3>
+                <div className="text-center space-x-10">
+                    <button onClick={saveRecipe} className="bg-green-600 hover:bg-green-400 rounded mb-10 text-white text-xl px-6 py-3">Save Recipe</button>
+                    <button className="bg-blue-500 hover:bg-blue-300 rounded mb-10 text-white text-xl px-6 py-3">Generate Another Recipe</button>
+                    <button className="bg-orange-500 hover:bg-orange-300 rounded mb-10 text-white text-xl px-6 py-3">Try a Different Dish</button>
+                </div>
+                <div className={"text-center mb-10 text-lg " + (confirmation.includes("Error") ? "text-red-500" : "text-green-700")}>{confirmation}</div>
                 <div className="flex flex-wrap lg:w-2/3 mx-auto text-2xl mb-24">
                     <div className="w-full xl:w-1/2 px-8">
                         <h4 className="text-center text-3xl text-white font-medium mb-10 bg-gradient-to-r from-blue-500 via-blue-800 to-blue-500 p-4">Nutrients</h4>
@@ -154,12 +181,7 @@ function HomePage() {
                         {generating ? "Generating..." : "Generate Recipes!"}
                     </button>
                 </div>
-                {error && (
-                    <div className="text-center text-lg">
-                        A recipe could not be generated with your input. Please
-                        try again or use different input text.
-                    </div>
-                )}
+                <div className={"text-center mt-6 text-lg " + (confirmation.includes("Error") ? "text-red-500" : "text-green-700")}>{confirmation}</div>
             </div>
         );
     }

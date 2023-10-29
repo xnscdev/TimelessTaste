@@ -1,12 +1,13 @@
 import React from "react";
 import OpenAI from "openai";
 
-// const openai = new OpenAI({
-//     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
-//     dangerouslyAllowBrowser: true
-// });
+const openai = new OpenAI({
+    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+    dangerouslyAllowBrowser: true
+});
 
 function HomePage() {
+<<<<<<< HEAD
   // const getRecipe = async () => {
   //     // const initialPrompt = {
   //     //     role: 'system',
@@ -21,6 +22,22 @@ function HomePage() {
   //     });
   //     console.log(response.choices);
   // };
+=======
+    const getRecipe = async () => {
+        // const initialPrompt = {
+        //     role: 'system',
+        //     content: 'You are a helpful mystic who does not reference itself and helps interpret dreams.'
+        // };
+        const messages = [
+            {role: 'user', content: 'What is the capital of the United States?'}
+        ];
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages
+        });
+        console.log(response.choices);
+    };
+>>>>>>> a99709ad8c1938502fdcbc63096c0c4e868182bc
 
   return (
     <>
@@ -51,12 +68,38 @@ function HomePage() {
               />
             </div>
             <div className="text-center">
+<<<<<<< HEAD
               <button
                 type="submit"
                 className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 "
               >
                 Submit
               </button>
+=======
+                <div className="text-center">
+                    <h2 className="text-4xl font-medium my-10 text-blue-900">What would you like to eat today?</h2>
+                    <form>
+                        <div className="mb-4 w-1/2 mx-auto">
+                            <input
+                                type="text"
+                                id="text-input"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+                                placeholder="Type something..."
+                                // value={inputValue}
+                                // onChange={(e) => setInputValue(e.target.value)}
+                            />
+                        </div>
+                        <div className="text-center">
+                            <button
+                                type="submit"
+                                className="text-xl bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+                            >
+                                Generate Recipes!
+                            </button>
+                        </div>
+                    </form>
+                </div>
+>>>>>>> a99709ad8c1938502fdcbc63096c0c4e868182bc
             </div>
           </form>
         </div>

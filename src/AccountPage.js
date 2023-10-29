@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {doc, getDoc, updateDoc} from 'firebase/firestore';
+import {doc, getDoc, setDoc} from 'firebase/firestore';
 import {auth, db} from "./firebase";
 
 function AccountPage() {
@@ -44,7 +44,7 @@ function AccountPage() {
     const saveProfile = async () => {
         const uid = auth.currentUser.uid;
         try {
-            await updateDoc(doc(db, 'users', uid), {
+            await setDoc(doc(db, 'users', uid), {
                 dietaryRestrictions,
                 diet,
                 trackCalories,
